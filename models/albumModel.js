@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const albumSchema = mongoose.Schema(
+const albumSchema = new mongoose.Schema(
     {
         titulo: {
             type: String,
@@ -34,5 +34,5 @@ const albumSchema = mongoose.Schema(
     }
 );
 
-const Album = mongoose.Model("albums", albumSchema);
+const Album = mongoose.model("albums", albumSchema);
 module.exports = Album;

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const dbConnect = async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/");
+        await mongoose.connect("mongodb://localhost:27017/dbVictrolaApi");
         console.log("Conexión exitosa con base de datos");
     } catch (error) {
         console.error("Error en conexión con base de datos", error);
