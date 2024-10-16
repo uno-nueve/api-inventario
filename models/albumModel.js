@@ -16,11 +16,11 @@ const albumSchema = new mongoose.Schema(
         },
         estado: {
             type: String,
-            enum: ["Disponible", "Alquilado", "Vendido", "Agotado"],
+            enum: ["Disponible", "Agotado"],
             default: "Disponible",
         },
-        fechaAlquiler: {
-            type: Date,
+        stock: {
+            type: Number,
         },
         fechaCompra: {
             type: Date,
