@@ -111,7 +111,6 @@ router.put("/albums/:id/buy", async (req, res) => {
         }
 
         album.stock = album.stock - 1;
-        album.fechaCompra = new Date();
         await album.save();
 
         res.status(200).send(album);
@@ -134,7 +133,6 @@ router.put("/albums/:id/return", async (req, res) => {
         }
 
         album.stock = album.stock + 1;
-        album.fechaDevolución = new Date();
         await album.save();
 
         res.status(200).send(album);
