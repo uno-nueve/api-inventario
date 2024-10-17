@@ -22,12 +22,17 @@ const albumSchema = new mongoose.Schema(
         stock: {
             type: Number,
         },
-        fechaCompra: {
-            type: Date,
-        },
-        fechaDevolución: {
-            type: Date,
-        },
+        images: [
+            {
+                url: {
+                    type: String,
+                    required: true,
+                },
+                resolucion: {
+                    type: String,
+                },
+            },
+        ],
     },
     {
         timestamps: true,
