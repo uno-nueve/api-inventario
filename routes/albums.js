@@ -1,5 +1,6 @@
 const express = require("express");
 const Album = require("../models/albumModel");
+const transactionMiddleware = require("../middlewares/transactionMiddleware");
 
 const router = express.Router();
 
@@ -98,12 +99,16 @@ router.get("/albums/catalog/search", async (req, res) => {
 });
 
 //Actualizar stock de un album al comprar
-router.put("/albums/:id/buy", async (req, res) => {
+router.put("/albums/:id/buy", transactionMiddleware, async (req, res) => {
     try {
         const album = await Album.findById(req.params.id);
 
         if (!album) {
             return res.status(404).send({ message: "Album no encontrado" });
+        }
+
+        if (album.stock === 0) {
+            return res.status(400).send({ message: "Album agotado" });
         }
 
         if (album.stock === 1) {
@@ -113,14 +118,14 @@ router.put("/albums/:id/buy", async (req, res) => {
         album.stock = album.stock - 1;
         await album.save();
 
-        res.status(200).send(album);
+        res.status(200).send({ idTransaccion: res.locals.idTransaccion, album });
     } catch (error) {
         res.status(400).send({ message: "Error al actualizar el stock del album", error });
     }
 });
 
 //Actualizar el stock de un album al devolverlo
-router.put("/albums/:id/return", async (req, res) => {
+router.put("/albums/:id/return", transactionMiddleware, async (req, res) => {
     try {
         const album = await Album.findById(req.params.id);
 
@@ -135,7 +140,7 @@ router.put("/albums/:id/return", async (req, res) => {
         album.stock = album.stock + 1;
         await album.save();
 
-        res.status(200).send(album);
+        res.status(200).send({ idTransaccion: res.locals.idTransaccion, album });
     } catch (error) {
         res.status(400).send({ message: "Error al devolver album", error });
     }
