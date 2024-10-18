@@ -9,6 +9,7 @@ const HOST = process.env.HOST || "localhost";
 
 app.use(loggingMiddleware);
 app.use(express.json());
+app.use(albumsRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello world!");
