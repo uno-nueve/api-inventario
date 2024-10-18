@@ -28,8 +28,11 @@ const albumSchema = new mongoose.Schema(
                     type: String,
                     required: true,
                 },
-                resolucion: {
-                    type: String,
+                height: {
+                    type: Number,
+                },
+                width: {
+                    type: Number,
                 },
             },
         ],
