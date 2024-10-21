@@ -29,6 +29,16 @@ http://localhost:3000/albums/:id
 http://localhost:3000/albums/:id
 ```
 
+```
+[GET] Obtiene todos los registros de ventas
+http://localhost:3000/sales/
+```
+
+```
+[DELETE] Elimina un registro de venta por ID
+http://localhost:3000/sales/:id
+```
+
 ## Lógica de negocios
 
 ```
@@ -42,6 +52,6 @@ http://localhost:3000/albums/:id/buy
 ```
 
 ```
-[PUT] Actualiza el stock al devolver un album
-http://localhost:3000/albums/:id/return
+[PUT] Actualiza el estado de una venta y el stock de un album al devolverlo
+http://localhost:3000/sales/:id/return
 ```
