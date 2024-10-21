@@ -1,6 +1,7 @@
 const express = require("express");
 const dbConnect = require("./config/db");
 const albumsRouter = require("./routes/albums");
+const ventasRouter = require("./routes/ventas");
 const loggingMiddleware = require("./middlewares/loggingMiddleware");
 
 const app = express();
@@ -10,6 +11,7 @@ const HOST = process.env.HOST || "localhost";
 app.use(loggingMiddleware);
 app.use(express.json());
 app.use(albumsRouter);
+app.use(ventasRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello world!");
