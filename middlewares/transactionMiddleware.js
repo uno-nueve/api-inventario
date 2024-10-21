@@ -1,6 +1,6 @@
 //Crea un ID random de 6 dígitos para cada transacción
 const transactionMiddleware = (req, res, next) => {
-    let transactionID = "#";
+    let transactionID = "";
 
     function getRandomNumber(m) {
         return Math.floor(Math.random() * m);
