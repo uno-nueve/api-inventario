@@ -22,7 +22,9 @@ app.get("/", (req, res) => {
 
 dbConnect()
     .then(() => {
-        console.log(`Server corriendo en puerto: http://${HOST}:${PORT}`);
+        app.listen(PORT, () => {
+            console.log(`Server corriendo en puerto: http://${HOST}:${PORT}`);
+        });
     })
     .catch((error) => {
         console.error("Servidor no inicializado. Error con la base de datos");
