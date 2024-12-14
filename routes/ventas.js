@@ -14,18 +14,23 @@ router.get("/sales", async (req, res) => {
     }
 });
 
+//Obtener una venta por número de orden
 router.get("/sales/:id", async (req, res) => {
     try {
-        const sale = await Venta.findById(req.params.id);
+        const sale = await Venta.findOne({ ordenNumero: req.params.id }).populate({
+            path: "album",
+        });
 
         if (!sale) {
             return res.status(404).send({ message: "Venta no encontrada" });
         }
+        res.status(200).send(sale);
     } catch (error) {
         res.status(500).send({ message: "Error obteniendo registro de venta", error });
     }
 });
 
+//Eliminar una venta por ID
 router.delete("/sales/:id", async (req, res) => {
     try {
         const ventaEliminada = await Venta.findByIdAndDelete(req.params.id);
