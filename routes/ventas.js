@@ -7,10 +7,22 @@ const router = express.Router();
 //Obtener todas las ventas
 router.get("/sales", async (req, res) => {
     try {
-        const sales = await Venta.find();
+        const sales = await Venta.find().populate({ path: "album" });
         res.status(200).send(sales);
     } catch (error) {
         res.status(500).send({ message: "Error obteniendo los registros de ventas", error });
+    }
+});
+
+router.get("/sales/:id", async (req, res) => {
+    try {
+        const sale = await Venta.findById(req.params.id);
+
+        if (!sale) {
+            return res.status(404).send({ message: "Venta no encontrada" });
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error obteniendo registro de venta", error });
     }
 });
 

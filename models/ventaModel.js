@@ -12,7 +12,7 @@ const ventaSchema = new mongoose.Schema(
         },
         album: {
             type: mongoose.Types.ObjectId,
-            ref: "Album",
+            ref: "albums",
         },
         monto: {
             type: Number,
