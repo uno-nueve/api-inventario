@@ -48,7 +48,9 @@ router.delete("/sales/:id", async (req, res) => {
 //Actualizar el stock de un album al devolverlo y modificar el estado de la venta
 router.put("/sales/:id/return", async (req, res) => {
     try {
-        const venta = await Venta.findOne({ ordenNumero: req.params.id });
+        const venta = await Venta.findOne({ ordenNumero: req.params.id }).populate({
+            path: "album",
+        });
 
         if (!venta) {
             return res.status(404).send({ message: "Venta no encontrada" });
@@ -70,7 +72,7 @@ router.put("/sales/:id/return", async (req, res) => {
         await album.save();
         await venta.save();
 
-        res.status(200).send({ venta, album });
+        res.status(200).send({ venta });
     } catch (error) {
         res.status(400).send({ message: "Error al devolver album", error });
     }
